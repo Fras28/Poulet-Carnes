@@ -79,7 +79,7 @@ export const asyncCategorias = () => {
   return async function (dispatch) {
     try {
       const response = await axios.get(API_CATEGORIAS);
-      console.log(response.data.data, " categoriasssss");
+      const categoriasOrdenadas = response.data.data.sort((a, b) => a.id - b.id);
       return dispatch(allCategorias(response.data.data));
     } catch (error) {
       console.error("Error fetching data:", error);

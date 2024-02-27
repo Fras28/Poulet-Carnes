@@ -6,7 +6,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Slide from "@mui/material/Slide";
-import Logo from "../assets/LogoCoqui.png"
+import Logo from "../assets/Logo.png"
 import "./BtnNavidad.css";
 
 const Transition = React.forwardRef(function Transition(props, ref) {

@@ -2,16 +2,13 @@ import React, { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import "./LandingPage.css";
 
-import comidas from "../assets/PolloArt.jpg";
-import Almacen from "../assets/LogoCoqui.png";
-import bebidas from "../assets/bebidas.webp";
-import NYEShanti from "../assets/NYEShanti.webp";
-import TrackClubIMG from "../assets/TrackClub.webp";
-import Logo from "../assets/LogoCoqui.png"
+
+
+import Logo from "../assets/Logo.png"
 import { VerPedido } from "../BtnBag/BtnBag";
-import AlertDialogSlide from "../BtnNavidad/BtnNavidad";
+
 import { useDispatch, useSelector } from "react-redux";
-import { asyncAllProducts } from "../redux/slice";
+import { asyncAllProducts, asyncCategorias, asyncComercio } from "../redux/slice";
 
 export default function LandingPage(url) {
   const dispatch = useDispatch();
@@ -19,7 +16,7 @@ export default function LandingPage(url) {
     // Función para realizar la acción deseada
     const fetchData = () => {
       console.log("Effect is running");
-      dispatch(asyncAllProducts());
+      dispatch(asyncCategorias());
     };
 
     // Ejecutar la función inmediatamente al montar el componente
@@ -34,13 +31,12 @@ export default function LandingPage(url) {
   const id = url.location.pathname.slice(1,3)
   const { categorias } = useSelector((state) => state.alldata);
 
-
   return (
     <div className="animate__animated  animate__zoomIn">
       <div className="naviLanding titCasa ">
         <div className="logoL">
           <NavLink to={`/${id}`} >
-        <img src={Logo} alt="" width="150px"/>
+        <img src={Logo} alt="" width="120px"/>
           </NavLink>
         </div>
         <div className="navi2">
@@ -53,7 +49,7 @@ export default function LandingPage(url) {
           >
             <path d="M59 0.999995L0 1" stroke="#E88A23" />
           </svg>
-          <p className="naviTit2"> Nuesto Menú </p>
+          <p className="naviTit2"> Nuesto Catalogo </p>
           <svg
             width="59"
             height="2"
@@ -68,25 +64,23 @@ export default function LandingPage(url) {
 
       <div className="conteinerLB2  ">
         <div className="rowsCardL">
-          <NavLink
+          {categorias?.map(categoria =>  <NavLink
             className="navLink"
             to={
               url.location.pathname === "/"
-                ? `/Cafeteria`
-                : `${url.location.pathname}/Polleria`
+                ? `/${categoria.attributes?.name}`
+                : `${url.location.pathname}/${categoria.attributes?.name}`
             }
           >
             <div className="titInicio">
-              <img src={comidas} alt="fotito" />
-              <p>{categorias[0]?.attributes?.name}</p>
+            <img
+        src={categoria.attributes.picture.data || Logo  }
+        alt="fotito"
+      />
+              <p>{categoria.attributes?.name}</p>
             </div>
-          </NavLink>
-          <NavLink className="navLink" to={`${url.location.pathname}/Comidas`}>
-            <div className="titInicio">
-              <img src={Almacen} alt=""/>
-              <p>Almacen</p>
-            </div>
-          </NavLink>
+          </NavLink>)}
+
         </div>
       </div>
       <div className="navi2">

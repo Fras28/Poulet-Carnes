@@ -17,8 +17,8 @@
   width: 100%;
 }
 .titInicio {
-  width: 149px;
-  height: 157px;
+  width: 135px;
+  height: 135px;
   word-wrap: break-word;
   border-radius: 16px;
   background-color: white;
@@ -57,8 +57,6 @@
   justify-content: space-evenly;
   font-size: 1.3rem;
   font-family: 'Montserrat', sans-serif;
-  margin-bottom: 1rem;
-  margin-top: 16px;
 }
 .navi2 >p{
  margin:0 1rem 0 1rem

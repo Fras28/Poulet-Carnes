@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Cards } from "../Cards/Cards.jsx";
-import "./Polleria.css";
+import "./Categorias.css";
 import { Nav } from "../Nav/Nav.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { asyncAllProducts } from "../redux/slice.jsx";
@@ -17,7 +17,7 @@ import nuggets from "../assets/Pollo/nuggets.jpg"
 import Spinner from "../assets/Spinner/Spinner.jsx";
 import Logo from "../assets/LogoCoqui.png"
 
-export const Polleria = (id) => {
+export const Congelados = (id) => {
   const mesa = id.match.url.slice(1, 3);
 
   let dispatch = useDispatch();

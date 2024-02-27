@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import "./Nav.css";
-import Logo from "../assets/LogoCoqui.png"
+import Logo from "../assets/Logo.png"
 import { Route } from "react-router-dom";
 
 export const Nav = (id) => {
