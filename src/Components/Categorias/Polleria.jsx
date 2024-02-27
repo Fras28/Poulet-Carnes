@@ -46,37 +46,37 @@ export const Polleria = (id) => {
   );
 
   const CafeteriaProducts = soloEsteComercio?.filter(
-    (e) => e.attributes?.categorias?.data.id === 1
+    (e) => e.attributes?.categorias?.data.id === 2
     );
 
   const X1 = CafeteriaProducts?.filter(
-    (e) => e.attributes?.sub_categoria?.data?.id === 1
-  );
-  const X2 = CafeteriaProducts?.filter(
-    (e) => e.attributes?.sub_categoria?.data?.id === 2
-  );
-  const X3 = CafeteriaProducts?.filter(
-    (e) => e.attributes?.sub_categoria?.data?.id === 3
-  );
-  const X4 = CafeteriaProducts?.filter(
     (e) => e.attributes?.sub_categoria?.data?.id === 4
   );
-  const X5 = CafeteriaProducts?.filter(
+  const X2 = CafeteriaProducts?.filter(
     (e) => e.attributes?.sub_categoria?.data?.id === 5
   );
-  const X6 = CafeteriaProducts?.filter(
+  const X3 = CafeteriaProducts?.filter(
     (e) => e.attributes?.sub_categoria?.data?.id === 6
   );
-  const X7 = CafeteriaProducts?.filter(
+  const X4 = CafeteriaProducts?.filter(
     (e) => e.attributes?.sub_categoria?.data?.id === 7
   );
+  // const X5 = CafeteriaProducts?.filter(
+  //   (e) => e.attributes?.sub_categoria?.data?.id === 5
+  // );
+  // const X6 = CafeteriaProducts?.filter(
+  //   (e) => e.attributes?.sub_categoria?.data?.id === 6
+  // );
+  // const X7 = CafeteriaProducts?.filter(
+  //   (e) => e.attributes?.sub_categoria?.data?.id === 7
+  // );
 
 
   return (
     <div className="containerL">
       <Nav id={mesa} />
       <div className="sectioner">
-  {[X7, X6, X5, X4, X3, X2, X1].map((product, index) => (
+  {[X4, X3, X2, X1].map((product, index) => (
     product[0] ? (
       <a key={index} href={`#${product[0].attributes.sub_categoria.data.id}`} >
         {product[0]?.attributes.sub_categoria.data.attributes.name}
@@ -125,7 +125,7 @@ export const Polleria = (id) => {
             </>
           ) : null}
 
-          {X5[0] ? (
+          {/* {X5[0] ? (
             <>
               <img
                 src={papas}
@@ -156,7 +156,7 @@ export const Polleria = (id) => {
               />
               <Cards products={X7} />
             </>
-          ) : null}
+          ) : null} */}
         </div>
        {soloEsteComercio.length === 0? <Spinner imageUrl={Logo}/>:null} 
       </div>
