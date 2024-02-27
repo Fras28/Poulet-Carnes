@@ -13,7 +13,7 @@ import { asyncAllProducts, asyncCategorias, asyncComercio } from "../redux/slice
 export default function LandingPage(url) {
   const dispatch = useDispatch();
   useEffect(() => {
-    // Función para realizar la acción deseada
+
     const fetchData = () => {
       console.log("Effect is running");
       dispatch(asyncCategorias());
