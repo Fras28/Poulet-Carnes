@@ -13,7 +13,7 @@ export const Foot = () => {
   return (
     <footer className="footy animate__animated  animate__zoomIn">
       <div className="linkss">
-        <a className="links" href={`http://wa.me/${comercio[0]?.attributes?.whatsapp} `} Target="_blank">
+        <a className="links" href={`http://wa.me/${comercio[0]?.attributes?.whatsapp}`} Target="_blank">
           <svg
             className="linkC"
             width="46"
