@@ -34,7 +34,6 @@ export default function LandingPage(url) {
   }, [dispatch]);
   const id = url.location.pathname.slice(1, 3);
   const { categorias } = useSelector((state) => state.alldata);
-  console.log(categorias, " api ??");
   return (
     <div className="animate__animated  animate__zoomIn">
       {categorias.length === 0 ? <Spinner imageUrl={Logo} /> : null}

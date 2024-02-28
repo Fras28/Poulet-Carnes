@@ -56,7 +56,6 @@ export const asyncAllProducts = () => {
   return async function (dispatch) {
     try {
       const response = await axios.get(API_STRAPI_ARTICTULOS);
-      console.log(response.data.data, "articulos pollo");
       return dispatch(allProducts(response.data.data));
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -67,7 +66,6 @@ export const asyncComercio = () => {
   return async function (dispatch) {
     try {
       const response = await axios.get(API_COMERCIO);
-      console.log(response.data.data, "info comercio");
       return dispatch(fillComercio(response.data.data));
     } catch (error) {
       console.error("Error fetching data comercio:", error);
