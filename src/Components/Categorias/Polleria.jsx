@@ -6,16 +6,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { asyncAllProducts } from "../redux/slice.jsx";
 import { VerPedido } from "../BtnBag/BtnBag.jsx";
 
-import milanesas from "../assets/Pollo/milanesas.jpg"
-import hamburguesas from "../assets/Pollo/hamburguesas.jpg"
-import polloTrozado from "../assets/Pollo/polloTrozado.jpg"
-import arrollado from "../assets/Pollo/arrollados.jpg"
-import papas from "../assets/Pollo/papas.jpg"
-import merluza from "../assets/Pollo/merluza.webp"
-import nuggets from "../assets/Pollo/nuggets.jpg"
+import milanesas from "../assets/Pollo/milanesas.jpg";
+import Hamburguesas from "../assets/Pollo/hamburguesas.jpg";
+import polloTrozado from "../assets/Pollo/polloTrozado.jpg";
+import arrollado from "../assets/Pollo/arrollados.jpg";
+import papas from "../assets/Pollo/papas.jpg";
+import merluza from "../assets/Pollo/merluza.webp";
+import nuggets from "../assets/Pollo/nuggets.jpg";
 
 import Spinner from "../assets/Spinner/Spinner.jsx";
-import Logo from "../assets/Logo.png"
+import Logo from "../assets/Logo.png";
+
+const API = process.env.REACT_APP_API_STRAPI;
 
 export const Polleria = (id) => {
   const mesa = id.match.url.slice(1, 3);
@@ -41,124 +43,67 @@ export const Polleria = (id) => {
     return () => clearInterval(intervalId);
   }, [dispatch]);
 
-  const soloEsteComercio = allProduct.filter(
+  const soloEsteComercio = allProduct?.filter(
     (e) => e.attributes.comercio.data.id === 1
   );
 
-  const CafeteriaProducts = soloEsteComercio?.filter(
+  const Productos = soloEsteComercio?.filter(
     (e) => e.attributes?.categorias?.data.id === 2
-    );
+  );
 
-  const X1 = CafeteriaProducts?.filter(
-    (e) => e.attributes?.sub_categoria?.data?.id === 4
-  );
-  const X2 = CafeteriaProducts?.filter(
-    (e) => e.attributes?.sub_categoria?.data?.id === 5
-  );
-  const X3 = CafeteriaProducts?.filter(
-    (e) => e.attributes?.sub_categoria?.data?.id === 6
-  );
-  const X4 = CafeteriaProducts?.filter(
-    (e) => e.attributes?.sub_categoria?.data?.id === 7
-  );
-  // const X5 = CafeteriaProducts?.filter(
-  //   (e) => e.attributes?.sub_categoria?.data?.id === 5
-  // );
-  // const X6 = CafeteriaProducts?.filter(
-  //   (e) => e.attributes?.sub_categoria?.data?.id === 6
-  // );
-  // const X7 = CafeteriaProducts?.filter(
-  //   (e) => e.attributes?.sub_categoria?.data?.id === 7
-  // );
 
+  const subCategoriaFilters = Productos?.reduce((acc, product) => {
+    const subCategoriaId = product.attributes?.sub_categoria?.data?.id;
+  
+    if (subCategoriaId) {
+      if (!acc[subCategoriaId]) {
+        acc[subCategoriaId] = [];
+      }
+      acc[subCategoriaId].push(product);
+    }
+  
+    return acc;
+  }, []);
+  
+  // Puedes acceder a cada Xn dinámicamente
+  const dynamicVariables = Object.keys(subCategoriaFilters).map((key) => {
+    return subCategoriaFilters[key];
+  });
 
   return (
     <div className="containerL">
       <Nav id={mesa} />
       <div className="sectioner">
-  {[X4, X3, X2, X1].map((product, index) => (
-    product[0] ? (
-      <a key={index} href={`#${product[0].attributes.sub_categoria.data.id}`} >
-        {product[0]?.attributes.sub_categoria.data.attributes.name}
-      </a>
-    ) : null
-  ))}
-</div>
+        {subCategoriaFilters.map((product, index) =>
+          product[0] ? (
+            <a
+              key={index}
+              href={`#${product[0].attributes.sub_categoria.data.id}`}
+            >
+              {product[0]?.attributes.sub_categoria.data.attributes.name}
+            </a>
+          ) : null
+        )}
+      </div>
       <div className="conteinerLC ">
         <div className="conteinerLB2 animate__animated  animate__zoomIn animate__faster">
-          {X1[0] ? (
-            <>
-              <img src={milanesas} alt="promo" id={X1[0]?.attributes?.sub_categoria?.data?.id}/>
-              <Cards products={X1} />
-            </>
-          ) : null}
-
-          {X2[0] ? (
-            <>
-              <img
-                src={hamburguesas}
-                alt="promo"
-                id={X2[0]?.attributes?.sub_categoria?.data?.id}
-              />
-              <Cards products={X2} />
-            </>
-          ) : null}
-          {X3 ? (
-            <>
-              <img
-                src={polloTrozado}
-                alt="promo"
-                id={X3[0]?.attributes?.sub_categoria?.data?.id}
-              />
-              <Cards products={X3} />
-            </>
-          ) : null}
-          {X4[0] ? (
-            <>
-              {" "}
-              <img
-                src={arrollado}
-                alt="promo"
-                id={X4[0]?.attributes?.sub_categoria?.data?.id}
-              />
-              <Cards products={X4} />
-            </>
-          ) : null}
-
-          {/* {X5[0] ? (
-            <>
-              <img
-                src={papas}
-                alt="promo"
-                id={X5[0]?.attributes?.sub_categoria?.data?.id}
-              />
-              <Cards products={X5} />
-            </>
-          ) : null}
-
-          {X6[0] ? (
-            <>
-              {" "}
-              <img
-                src={merluza}
-                alt="promo"
-                id={X6[0]?.attributes?.sub_categoria?.data?.id}
-              />
-              <Cards products={X6} /> aaa
-            </>
-          ) : null}
-          {X7[0] ? (
-            <>
-              <img
-                src={nuggets}
-                alt="promo"
-                id={X7[0]?.attributes?.sub_categoria?.data?.id}
-              />
-              <Cards products={X7} />
-            </>
-          ) : null} */}
+        {subCategoriaFilters?.map(product => (
+      product[0]?
+  <div key={product[0]?.attributes?.sub_categoria?.data?.id}>
+    <img
+      src={
+        `${API}${product[0]?.attributes?.sub_categoria?.data?.attributes?.picture?.data?.attributes?.url}` ||
+        Logo
+      }
+      alt={"img - "+product[0]?.attributes?.sub_categoria?.data?.attributes?.name}
+      id={product[0]?.attributes?.sub_categoria?.data?.id}
+      className="ImgSubCat"
+    />
+    <Cards products={product} />
+  </div> : null
+))}
         </div>
-       {soloEsteComercio.length === 0? <Spinner imageUrl={Logo}/>:null} 
+        {soloEsteComercio.length === 0 ? <Spinner imageUrl={Logo} /> : null}
       </div>
       <VerPedido id={mesa} />
     </div>
