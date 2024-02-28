@@ -8,6 +8,8 @@ font-family: 'Sono', sans-serif; */
 
 .App {
   text-align: center;
+  background: radial-gradient(circle at 10% 20%, rgb(255, 200, 124) 0%, rgb(252, 251, 121) 90%);
+  min-height: 100vh;
 }
 
 .App-logo {

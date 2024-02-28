@@ -5,7 +5,7 @@ import './App.css';
 
 import { Foot } from './Components/Footer/Footer.jsx';
 
-import { Bag } from './Components/myBag/myBag.jsx';
+import { Bag, BagXX } from './Components/myBag/myBag.jsx';
 import { MyFoot } from './Components/myFoot/MyFooter.jsx';
 
 import { Inicio } from './Components/LandingStart/LandingStart.jsx';
@@ -26,7 +26,7 @@ function App() {
           <Route exact path="/:id/Landing/Carne Vacuna" component={Carniceria}/>
           <Route exact path="/:id/Landing/Embutidos" component={Embutidos}/>
           <Route exact path="/:id/Landing/Congelados" component={Congelados}/>
-          <Route exact path="/:id/bag" component={Bag}/>
+          <Route exact path="/:id/bag" component={BagXX}/>
 </Switch>
   <Foot/>
   <MyFoot/>

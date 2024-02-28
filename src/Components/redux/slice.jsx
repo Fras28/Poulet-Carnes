@@ -31,12 +31,11 @@ export const dataSlice = createSlice({
       state.favProd = [...state.favProd, action.payload];
     },
     cancelBagProducts: (state, action) => {
-      const indexProd = state.favProd.map(object => object.name).indexOf(action.payload);
-      console.log(indexProd);
-      if (indexProd !== "-1") {
-        const newBag = state.favProd.splice(indexProd,1)
-        state.favProd = state.favProd.filter(e => e !== newBag)
-      } 
+      const indexProd = state.favProd.findIndex(product => product.attributes.name === action.payload);
+    console.log(indexProd, "cancel bag product");
+      if (indexProd !== -1) {
+        state.favProd.splice(indexProd, 1);
+      }
     },
     SearchProducts: (state, action) => {
       state.copyallProducts = state.copyallProducts
@@ -93,8 +92,9 @@ export const asyncfavProducts = (pedido) => {
   };
 };
 export const asyncCancelFav = (pedido) => {
+  console.log(pedido.attributes.name, "async cancel fav Producto para quitar ");
   return async function (dispatch) {
-    return dispatch(cancelBagProducts(pedido));
+    return dispatch(cancelBagProducts(pedido.attributes.name));
   };
 };
 export const asyncSearchBar = (string) => {

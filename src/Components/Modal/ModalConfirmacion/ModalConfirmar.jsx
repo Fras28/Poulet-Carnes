@@ -7,16 +7,20 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Slide from "@mui/material/Slide";
 import Logo from "../../assets/Logo.png";
-import "./ModalConfirmar.css";
+import "./ModalConfirmar.css"
 import { useSelector } from "react-redux";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function ModalConfirm({total, pago }) {
+export default function ModalConfirm({total, pago, whatsappMessage }) {
   const [open, setOpen] = React.useState(false);
   const [telefono, setTelefono] = React.useState("");
+  const [payment, setPayment] = React.useState({
+    payment: "",
+  });
+
   const [order, setOrder] = React.useState({
     pedido: "",
     description: "",
@@ -34,13 +38,19 @@ export default function ModalConfirm({total, pago }) {
     });
   };
 
-  console.log(favProd, "favProd");
+
   const handleClickOpen = () => {
     setOpen(true);
   };
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const metodoPago = function handbleOnMethod(e) {
+    setPayment({
+      payment: e.target.value,
+    });
   };
 
   return (
@@ -71,6 +81,8 @@ export default function ModalConfirm({total, pago }) {
             <br />
             ayudanos a tener una mejor atencion y dejarias tu numero de telefono
             :
+            <form className="formPedido">
+
             <input
               className={`telefono-input selectP  ${order.telefono.length === 10 ? "" : "redX"}`}
               type="tel"
@@ -81,17 +93,26 @@ export default function ModalConfirm({total, pago }) {
               onChange={handleTelefonoChange}
               placeholder="Ingresar telefono"
             />
+             <select
+            className="selectP"
+            onChange={metodoPago}
+            value={pago.payment}
+          >
+            <option hidden disabled selected value={""}>
+              Como pagas?
+            </option>
+            <option>Efectivo</option>
+            <option>Tarjeta</option>
+            <option>QR</option>
+          </select>
             <a
-              href={`http://wa.me/${
-                comercio[0]?.attributes?.whatsapp
-              }?text=Hola Rey Del Pollo ➤ ${favProd?.map(
-                (e) => e.attributes.name + "$" + e.attributes.price + ", "
-              )} Total = $ ${total}, "${pago}"`}
+              href={whatsappMessage}
               rel="noreferrer"
               target="_blank"
             >
               <button className="btnWssp low">Enviar Pedido </button>
             </a>{" "}
+            </form>
           </DialogContentText>
           {order.telefono.length === 10 ? "" : <p style={{color:"red"}}>El numero de telefono debe contener 10 caracteres Ej: 2915838406...</p>}
         </DialogContent>

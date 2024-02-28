@@ -9,6 +9,12 @@ import { VerPedido } from "../BtnBag/BtnBag";
 
 import { useDispatch, useSelector } from "react-redux";
 import { asyncAllProducts, asyncCategorias, asyncComercio } from "../redux/slice";
+import Spinner from "../assets/Spinner/Spinner";
+
+
+const API = process.env.REACT_APP_API_STRAPI
+
+
 
 export default function LandingPage(url) {
   const dispatch = useDispatch();
@@ -30,9 +36,10 @@ export default function LandingPage(url) {
   }, [dispatch]);
   const id = url.location.pathname.slice(1,3)
   const { categorias } = useSelector((state) => state.alldata);
-
+console.log(categorias, " api ??");
   return (
     <div className="animate__animated  animate__zoomIn">
+          {categorias.length === 0 ? <Spinner imageUrl={Logo} /> : null}
       <div className="naviLanding titCasa ">
         <div className="logoL">
           <NavLink to={`/${id}`} >
@@ -74,8 +81,9 @@ export default function LandingPage(url) {
           >
             <div className="titInicio">
             <img
-        src={categoria.attributes.picture.data || Logo  }
+        src={`${API}${categoria.attributes.picture.data.attributes.url}` || Logo  }
         alt="fotito"
+    
       />
               <p>{categoria.attributes?.name}</p>
             </div>
