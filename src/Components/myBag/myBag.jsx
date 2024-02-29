@@ -107,7 +107,7 @@ const whatsappMessage = Object.entries(groupedProducts).map(([productInfo, count
 }).join(', ');
 
 const whatsappLink = `http://wa.me/${comercio[0]?.attributes.whatsapp}?text=Hola ${comercio[0]?.attributes.name} Mensaje de mi pedido ➤ ${whatsappMessage} Total = $ ${total}, "${pago?.payment}"`;
-
+console.log(whatsappLink);
   return (
     <div className="backBag">
       <Nav id={id.match.params.id} />
