@@ -221,7 +221,6 @@ export const BagXX = (id) => {
           >
             <button
               className="btnWssp"
-              onClick={(e) => sendComanda(e)}
               disabled={
                 !(
                   /^\d{10}$/.test(order.Phone) &&
