@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./Footer.css";
 import { useDispatch, useSelector } from "react-redux";
 import { asyncComercio } from "../redux/slice";

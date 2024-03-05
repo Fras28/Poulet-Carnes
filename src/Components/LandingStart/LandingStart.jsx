@@ -13,20 +13,6 @@ export const Inicio = (url) => {
   const dispatch = useDispatch();
   const [animateOut, setAnimateOut] = useState(false);
   
-  useEffect(() => {
-    const fetchData = () => {
-      console.log("Effect is running");
-      dispatch(asyncComercio());
-      dispatch(asyncAllProducts());
-      dispatch(asyncCategorias());
-    };
-    
-    fetchData();
-    
-    const intervalId = setInterval(fetchData, 15 * 60 * 1000);
-    
-    return () => clearInterval(intervalId);
-  }, [dispatch]);
 
 
   const toTop = () => {

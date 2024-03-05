@@ -1,0 +1,55 @@
+/* ModalForm.css */
+
+.modal-form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+  .telefono-input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+  }
+  
+  .valid-message {
+    color: #4caf50;
+    margin: 5px 0 0;
+  }
+  
+  .error-message {
+    color: #f44336;
+    margin: 5px 0 0;
+  }
+  
+  .selectP {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+  }
+  
+  .btnWssp {
+    background-color: #4caf50;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .btnWssp:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  /* Add more styles as needed */
+  

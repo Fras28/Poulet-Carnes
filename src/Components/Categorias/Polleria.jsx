@@ -26,22 +26,6 @@ export const Polleria = (id) => {
 
   let { allProduct } = useSelector((state) => state.alldata);
 
-  useEffect(() => {
-    // Función para realizar la acción deseada
-    const fetchData = () => {
-      console.log("Effect is running");
-      dispatch(asyncAllProducts());
-    };
-
-    // Ejecutar la función inmediatamente al montar el componente
-    fetchData();
-
-    // Configurar la repetición cada 15 minutos
-    const intervalId = setInterval(fetchData, 15 * 60 * 1000); // 15 minutos en milisegundos
-
-    // Limpiar el intervalo al desmontar el componente para evitar fugas de memoria
-    return () => clearInterval(intervalId);
-  }, [dispatch]);
 
   const soloEsteComercio = allProduct?.filter(
     (e) => e.attributes.comercio.data.id === 1

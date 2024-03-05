@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {  Route,Switch} from 'react-router-dom';
 import Landing from "./Components/Landing/LandingPage.jsx"
 import './App.css';
@@ -14,8 +14,27 @@ import { Cerdo } from './Components/Categorias/Cerdo.jsx';
 import { Carniceria } from './Components/Categorias/Carniceria.jsx';
 import { Embutidos } from './Components/Categorias/Embutidos.jsx';
 import { Congelados } from './Components/Categorias/Congelados.jsx';
+import { asyncAllProducts, asyncCategorias, asyncComercio, asyncUser } from './Components/redux/slice.jsx';
+import { useDispatch } from 'react-redux';
 
 function App() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const fetchData = () => {
+      console.log("Effect is running");
+      dispatch(asyncComercio());
+      dispatch(asyncAllProducts());
+      dispatch(asyncCategorias());
+      dispatch(asyncUser());
+    };
+    
+    fetchData();
+    
+    const intervalId = setInterval(fetchData, 15 * 60 * 1000);
+    
+    return () => clearInterval(intervalId);
+  }, [dispatch]);
+
   return (
     <div className="App">
 <Switch>

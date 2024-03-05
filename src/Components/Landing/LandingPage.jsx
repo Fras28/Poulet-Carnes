@@ -1,37 +1,19 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { NavLink } from "react-router-dom";
 import "./LandingPage.css";
 
 import Logo from "../assets/Logo.png";
 import { VerPedido } from "../BtnBag/BtnBag";
 
-import { useDispatch, useSelector } from "react-redux";
-import {
-  asyncAllProducts,
-  asyncCategorias,
-  asyncComercio,
-} from "../redux/slice";
+import { useSelector } from "react-redux";
+
 import Spinner from "../assets/Spinner/Spinner";
 
 const API = process.env.REACT_APP_API_STRAPI;
 
 export default function LandingPage(url) {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    const fetchData = () => {
-      console.log("Effect is running");
-      dispatch(asyncCategorias());
-    };
+  
 
-    // Ejecutar la función inmediatamente al montar el componente
-    fetchData();
-
-    // Configurar la repetición cada 15 minutos
-    const intervalId = setInterval(fetchData, 15 * 60 * 1000); // 15 minutos en milisegundos
-
-    // Limpiar el intervalo al desmontar el componente para evitar fugas de memoria
-    return () => clearInterval(intervalId);
-  }, [dispatch]);
   const id = url.location.pathname.slice(1, 3);
   const { categorias } = useSelector((state) => state.alldata);
   return (
