@@ -20,7 +20,7 @@
   
   .valid-message {
     color: #4caf50;
-    margin: 5px 0 0;
+
   }
   
   .error-message {
@@ -29,7 +29,8 @@
   }
   
   .selectP {
-    width: 100%;
+    /* width: 100%; */
+
     padding: 8px;
     margin-bottom: 10px;
     border: 1px solid #ccc;

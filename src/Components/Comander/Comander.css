@@ -1,0 +1,100 @@
+/* Comander.css */
+
+.comandas-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.comandas-title {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.comandas-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.comanda-item {
+  margin-bottom: 20px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.comanda-details {
+  margin-bottom: 10px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+}
+
+.comanda-label {
+  font-weight: bold;
+  margin-right: 10px;
+  color: #555;
+}
+
+.comanda-value {
+  color: #333;
+}
+
+.order-items {
+  margin-top: 10px;
+}
+
+.order-item {
+  margin-bottom: 5px;
+  color: #555;
+}
+
+.BtnComander{
+  padding: .5rem;
+  border-radius: 8px;
+  background-color:#2B92D5 ;
+}
+
+.BtnComander:hover{
+
+  background-color:#0897f6 ;
+}
+/* Add additional styling as needed */
+
+  /* Estilos para el formulario de inicio de sesión */
+  
+  .login-container {
+    max-width: 400px;
+    margin: auto;
+    padding: 20px;
+  }
+  
+  .login-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .login-form label {
+    margin-bottom: 5px;
+  }
+  
+  .login-form input {
+    padding: 8px;
+    margin-bottom: 10px;
+  }
+  
+  .login-form button {
+    padding: 10px;
+    background-color: #4caf50;
+    color: #fff;
+    cursor: pointer;
+  }
+  
+  .login-form button:hover {
+    background-color: #45a049;
+  }

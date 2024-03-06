@@ -16,6 +16,7 @@ import { Embutidos } from './Components/Categorias/Embutidos.jsx';
 import { Congelados } from './Components/Categorias/Congelados.jsx';
 import { asyncAllProducts, asyncCategorias, asyncComercio, asyncUser } from './Components/redux/slice.jsx';
 import { useDispatch } from 'react-redux';
+import ComandasComponent from './Components/Comander/Comander.jsx';
 
 function App() {
   const dispatch = useDispatch();
@@ -45,6 +46,7 @@ function App() {
           <Route exact path="/:id/Landing/Carne Vacuna" component={Carniceria}/>
           <Route exact path="/:id/Landing/Embutidos" component={Embutidos}/>
           <Route exact path="/:id/Landing/Congelados" component={Congelados}/>
+          <Route exact path="/:id/Landing/Comander" component={ComandasComponent}/>
           <Route exact path="/:id/bag" component={BagXX}/>
 </Switch>
   <Foot/>

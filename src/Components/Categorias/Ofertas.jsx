@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Cards } from "../Cards/Cards.jsx";
 import "./Categorias.css";
-import { Nav } from "../Nav/Nav.jsx";
+import  Nav  from "../Nav/Nav.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { asyncAllProducts } from "../redux/slice.jsx";
 import { VerPedido } from "../BtnBag/BtnBag.jsx";

@@ -15,11 +15,14 @@ export const Inicio = (url) => {
   
 
 
-  const toTop = () => {
-    window.scrollTo(0, 0);
-  };
+  const [hasScrolledToTop, setHasScrolledToTop] = useState(false);
 
-  toTop();
+  useEffect(() => {
+    if (!hasScrolledToTop) {
+      window.scrollTo(0, 0);
+      setHasScrolledToTop(true);
+    }
+  }, [hasScrolledToTop]);
 
   const handleButtonClick = () => {
     // Realiza la lógica necesaria antes de la redirección

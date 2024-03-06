@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { CardsBag } from "./CardsBag/CardsB";
-import { Nav } from "../Nav/Nav";
+import  Nav  from "../Nav/Nav";
 import "./myBag.css";
 import {
   asyncAllProducts,
@@ -14,10 +14,15 @@ import ModalConfirm from "../Modal/ModalConfirmacion/ModalConfirmar";
 
 export const BagXX = (id) => {
   const dispatch = useDispatch();
-  const toTop = () => {
-    window.scrollTo(0, 0);
-  };
-  toTop();
+
+  const [hasScrolledToTop, setHasScrolledToTop] = useState(false);
+
+  useEffect(() => {
+    if (!hasScrolledToTop) {
+      window.scrollTo(0, 0);
+      setHasScrolledToTop(true);
+    }
+  }, [hasScrolledToTop]);
 
   useEffect(() => {
     const fetchData = () => {
@@ -111,48 +116,44 @@ export const BagXX = (id) => {
       <div className="boxPedido">
         <div className="boxPedido1"></div>
         <div className="wsspTarj">
-        <div className="ContInp">
-  <label htmlFor="telefono">Teléfono:</label>
-  <input
-    className={`telefono-input selectP ${
-      /^\d{10}$/.test(order.Phone) ? "" : "redX"
-    }`}
-    type="tel"
-    id="telefono"
-    name="Phone"
-    maxLength="10"
-    pattern="[0-9]{10}"
-    value={order.Phone}
-    onChange={handleOrder}
-    placeholder="Ingresar telefono"
-  />
-  {(order.Phone && /^\d{10}$/.test(order.Phone)) ? (
-    <p className="valid-message">✔️</p>
-  ) : (
-    (order.Phone && order.Phone !== "291" ) && (
-      <p className="error-message">
-        Por favor, ingrese un número de teléfono válido.
-      </p>
-    )
-  )}
-</div>
-          <div>
-            <label htmlFor="nombre">Nombre :</label>
-            <input
-              className={`telefono-input selectP ${
-                order.Name.length > 3 ? "" : "redX"
-              }`}
-              type="text"
-              id="nombre"
-              name="Name"
-              max="10"
-              value={order.Name}
-              onChange={handleOrder}
-              placeholder="Nombre de quien retira"
-            />
-          </div>
-          <div className="ContInp">
-  <label htmlFor="telefono">Teléfono:</label>
+          <label htmlFor="telefono">Teléfono:</label>
+          <input
+            className={`telefono-input selectP ${
+              /^\d{10}$/.test(order.Phone) ? "" : "redX"
+            }`}
+            type="tel"
+            id="telefono"
+            name="Phone"
+            maxLength="10"
+            pattern="[0-9]{10}"
+            value={order.Phone}
+            onChange={handleOrder}
+            placeholder="Ingresar telefono"
+          />
+          {order.Phone && /^\d{10}$/.test(order.Phone) ? (
+            <p className="valid-message">✔️</p>
+          ) : null}
+          {order.Phone && /^\d{10}$/.test(order.Phone)
+            ? null
+            : order.Phone &&
+              order.Phone !== "291" && (
+                <p className="error-message">
+                  Por favor, ingrese un número de teléfono válido.
+                </p>
+              )}
+          <label htmlFor="nombre">Nombre :</label>
+          <input
+            className={`telefono-input selectP ${
+              order.Name.length > 3 ? "" : "redX"
+            }`}
+            type="text"
+            id="nombre"
+            name="Name"
+            max="10"
+            value={order.Name}
+            onChange={handleOrder}
+            placeholder="Nombre de quien retira"
+          />
           <select
             className="selectP"
             name="Payment_type"
@@ -166,8 +167,6 @@ export const BagXX = (id) => {
             <option>Tarjeta</option>
             <option>QR</option>
           </select>
-          <div className="ContInp">
-  <label htmlFor="telefono">Teléfono:</label>
           <select
             className="selectP"
             name="Type_order"
@@ -180,11 +179,11 @@ export const BagXX = (id) => {
             <option>Delivery</option>
             <option>Take Away</option>
           </select>
-          </div>
-          </div>
-          <div   style={{
-                display: order.Type_order === "Delivery" ? "block" : "none",
-              }}>
+          <div
+            style={{
+              display: order.Type_order === "Delivery" ? "block" : "none",
+            }}
+          >
             <label htmlFor="domicilio">Domicilio:</label>
             <input
               className={`telefono-input selectP ${
@@ -199,7 +198,6 @@ export const BagXX = (id) => {
               value={order.Adress}
               onChange={handleOrder}
               placeholder="Domicilio para la entrega"
-         
             />
           </div>
           <a

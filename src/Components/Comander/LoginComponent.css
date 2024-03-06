@@ -1,0 +1,99 @@
+/* Estilos generales */
+body {
+    font-family: 'Arial', sans-serif;
+  }
+  
+  /* Estilos del botón principal */
+  .login-button {
+    background-color: #3498db;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .login-button:hover {
+    background-color: #2c3e50;
+  }
+  
+  /* Estilos del modal */
+  .modal-overlay {
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+  }
+  
+  /* Estilos del formulario */
+  .login-container {
+    margin: 0 auto;
+  }
+  
+  .login-heading {
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
+  
+  .form-input {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+  }
+  
+  /* Estilos del botón de envío */
+  .login-submit {
+    background-color: #2ecc71;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .login-submit:hover {
+    background-color: #27ae60;
+  }
+  
+  /* Estilos del botón de cierre del modal */
+  .modal-close {
+    background-color: #e74c3c;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+  }
+  
+  .modal-close:hover {
+    background-color: #c0392b;
+  }
+  

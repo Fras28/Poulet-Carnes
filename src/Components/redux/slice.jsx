@@ -1,4 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { act } from "@testing-library/react";
+import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from "axios";
 
 
@@ -9,6 +11,8 @@ const initialState = {
   categorias:[],
   comercio:[],
   clave:"",
+  comandas:[],
+  usuarioComander:"",
 };
 
 
@@ -47,6 +51,12 @@ export const dataSlice = createSlice({
         clave: action.payload,
       };
     },
+    fillUsuario: (state, action) => {
+      return {
+        ...state,
+        usuarioComander: action.payload,
+      };
+    },
     cancelBagProducts: (state, action) => {
       const indexProd = state.favProd.findIndex(
         (product) => product.attributes.name === action.payload
@@ -71,8 +81,24 @@ export const dataSlice = createSlice({
           .slice(0, 10),
       };
     },
+    fillComanda: (state, action) => {
+      let newComandas = Array.isArray(action.payload) ? action.payload : [action.payload];
+      newComandas = newComandas.flat(); // Flatten the array
+    
+      // Filter out existing comandas to avoid duplicates
+      const uniqueComandas = newComandas.filter(newComanda =>
+        !state.comandas.some(comanda => comanda.id === newComanda.id)
+      );
+    
+      return {
+        ...state,
+        comandas: [...state.comandas, ...uniqueComandas],
+      };
+    },
+    
   },
 });
+
 //   console.log(response.data.data.attributes.comercio.data.id, " esto es lo que trae el response de todos los arituclos");
 //-------------------------------------------------------------------------------------------------------------------
 //------------------------------------------ function Movies ------------------------------------------------------
@@ -184,9 +210,95 @@ export const asyncUser = () => {
     }
   };
 };
+
+
+export const asyncLogIn = ({email,password}) => {
+  return async function (dispatch) {
+    try {
+      const data = {
+        identifier:email,
+        password:password
+      };
+
+      const response = await axios.post(API_US, data);
+      const ComanderJWT = response.data.jwt;
+
+      return  dispatch(fillUsuario(ComanderJWT));
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+};
+
+
+
+
+
+export const asyncComandas = () => {
+  return async function (dispatch, getState) {
+    try {
+      const initialState = getState();
+    
+      const usuarioComander = initialState?.alldata?.usuarioComander;
+ 
+
+      const response = await axios.get(API_ORDER, {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${usuarioComander}`,
+        },
+      });
+
+      console.log(response.data.data, "antes de enviarlo");
+
+
+      return dispatch(fillComanda(response?.data?.data));
+    } catch (error) {
+      console.error('Error al obtener comandas:', error);
+      // Puedes dispatchar una acción para manejar el error según tus necesidades
+    }
+  };
+};
+
+
+ 
+
+export const asyncPedidoRealizado = (comanda) => {
+  return async function (dispatch, getState) {
+    try {
+      const initialState = getState();
+      const usuarioComander = initialState?.alldata?.usuarioComander;
+
+      // Modifica solo el estado de la propiedad 'status' a true
+      const updatedComanda = {
+        ...comanda.attributes,
+        Status: comanda.attributes.Status === false ? true : false,
+      };
+  
+
+      const response = await axios.put(`${API_ORDER}/${comanda.id}`, { data: updatedComanda }, {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${usuarioComander}`,
+        },
+      });
+
+      console.log(response.data.data, "antes de enviarlo");
+
+      // Después de realizar la edición, vuelve a obtener las comandas actualizadas
+      await dispatch(asyncComandas());
+
+      return dispatch(fillComanda(response?.data?.data));
+    } catch (error) {
+      console.error('Error al obtener comandas:', error);
+      // Puedes dispatchar una acción para manejar el error según tus necesidades
+    }
+  };
+};
+
 //----------------------------------------------------------------------------------------------------------------
 
-export const { allProducts, favProducts, cancelBagProducts, SearchProducts, allCategorias, fillComercio, fillClave } =
+export const { allProducts, favProducts, cancelBagProducts, SearchProducts, allCategorias, fillComercio, fillClave, fillComanda,fillUsuario } =
   dataSlice.actions;
 
 export default dataSlice.reducer;
