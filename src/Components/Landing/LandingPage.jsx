@@ -55,22 +55,22 @@ export default function LandingPage(url) {
               className="navLink"
               to={
                 url.location.pathname === "/"
-                  ? `/${categoria.attributes?.name}`
-                  : `${url.location.pathname}/${categoria.attributes?.name}`
+                  ? `/${categoria?.attributes?.name}`
+                  : `${url.location.pathname}/${categoria?.attributes?.name}`
               }
             >
               <div className="titInicio">
                 <div className="titInicioTop">
                   <img
                     src={
-                      `${API}${categoria.attributes.picture.data.attributes.url}` ||
+                      `${API}${categoria?.attributes?.picture?.data?.attributes?.url}` ||
                       Logo
                     }
                     alt="fotito"
                   />
                 </div>
                 <div className="titInicioBot">
-                  <p>{categoria.attributes?.name}</p>
+                  <p>{categoria?.attributes?.name}</p>
                 </div>
               </div>
             </NavLink>

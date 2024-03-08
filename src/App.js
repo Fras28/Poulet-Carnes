@@ -15,11 +15,12 @@ import { Carniceria } from './Components/Categorias/Carniceria.jsx';
 import { Embutidos } from './Components/Categorias/Embutidos.jsx';
 import { Congelados } from './Components/Categorias/Congelados.jsx';
 import { asyncAllProducts, asyncCategorias, asyncComercio, asyncUser } from './Components/redux/slice.jsx';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import ComandasComponent from './Components/Comander/Comander.jsx';
 
 function App() {
   const dispatch = useDispatch();
+  const {allProducts } = useSelector(state => state.alldata)
   useEffect(() => {
     const fetchData = () => {
       console.log("Effect is running");
@@ -34,7 +35,7 @@ function App() {
     const intervalId = setInterval(fetchData, 15 * 60 * 1000);
     
     return () => clearInterval(intervalId);
-  }, [dispatch]);
+  }, [allProducts,dispatch]);
 
   return (
     <div className="App">
