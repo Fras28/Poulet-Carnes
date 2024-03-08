@@ -16,7 +16,7 @@ export default function LandingPage(url) {
 
   const id = url.location.pathname.slice(1, 3);
   const { categorias } = useSelector((state) => state.alldata);
-const categoriasTrue = categorias.filter((categoria) => categoria.attributes.articulos.data.length !== 0)
+const categoriasTrue = categorias?.filter((categoria) => categoria?.attributes?.articulos?.data.length !== 0)
 
 
 
