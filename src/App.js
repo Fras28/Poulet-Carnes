@@ -17,10 +17,11 @@ import { Congelados } from './Components/Categorias/Congelados.jsx';
 import { asyncAllProducts, asyncCategorias, asyncComercio, asyncUser } from './Components/redux/slice.jsx';
 import { useDispatch, useSelector } from 'react-redux';
 import ComandasComponent from './Components/Comander/Comander.jsx';
+import { Achuras } from './Components/Categorias/Achuras.jsx';
 
 function App() {
   const dispatch = useDispatch();
-  const {allProducts } = useSelector(state => state.alldata)
+
   useEffect(() => {
     const fetchData = () => {
       console.log("Effect is running");
@@ -35,7 +36,7 @@ function App() {
     const intervalId = setInterval(fetchData, 15 * 60 * 1000);
     
     return () => clearInterval(intervalId);
-  }, [allProducts,dispatch]);
+  }, [dispatch]);
 
   return (
     <div className="App">
@@ -47,6 +48,7 @@ function App() {
           <Route exact path="/:id/Landing/Carne Vacuna" component={Carniceria}/>
           <Route exact path="/:id/Landing/Embutidos" component={Embutidos}/>
           <Route exact path="/:id/Landing/Congelados" component={Congelados}/>
+          <Route exact path="/:id/Landing/Achuras" component={Achuras}/>
           <Route exact path="/:id/Landing/Comander" component={ComandasComponent}/>
           <Route exact path="/:id/bag" component={BagXX}/>
 </Switch>

@@ -34,7 +34,7 @@ export const Ofertas = (id) => {
   );
 
   const Productos = soloEsteComercio?.filter(
-    (e) => e.attributes?.categorias?.data.id === 6
+    (e) => e.attributes?.categorias?.data?.id === 6
   );
 
 

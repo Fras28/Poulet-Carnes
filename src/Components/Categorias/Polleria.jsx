@@ -28,13 +28,14 @@ export const Polleria = (id) => {
 
 
   const soloEsteComercio = allProduct?.filter(
-    (e) => e.attributes.comercio.data.id === 1
+    (e) => e.attributes?.comercio?.data?.id === 1
   );
 
   const Productos = soloEsteComercio?.filter(
-    (e) => e.attributes?.categorias?.data.id === 2
+    (e) => e.attributes?.categorias?.data?.id === 2
   );
 
+  
 
   const subCategoriaFilters = Productos?.reduce((acc, product) => {
     const subCategoriaId = product.attributes?.sub_categoria?.data?.id;
@@ -53,6 +54,7 @@ export const Polleria = (id) => {
   const dynamicVariables = Object.keys(subCategoriaFilters).map((key) => {
     return subCategoriaFilters[key];
   });
+  console.log(soloEsteComercio[0].attributes.categorias.data," esto son los productos de carniceria");
 
   return (
     <div className="containerL">

@@ -6,33 +6,33 @@ import { useDispatch, useSelector } from "react-redux";
 import { asyncAllProducts } from "../redux/slice.jsx";
 import { VerPedido } from "../BtnBag/BtnBag.jsx";
 
-import milanesas from "../assets/Pollo/milanesas.jpg"
-import hamburguesas from "../assets/Pollo/hamburguesas.jpg"
-import polloTrozado from "../assets/Pollo/polloTrozado.jpg"
-import arrollado from "../assets/Pollo/arrollados.jpg"
-import papas from "../assets/Pollo/papas.jpg"
-import merluza from "../assets/Pollo/merluza.webp"
-import nuggets from "../assets/Pollo/nuggets.jpg"
+import milanesas from "../assets/Pollo/milanesas.jpg";
+import Hamburguesas from "../assets/Pollo/hamburguesas.jpg";
+import polloTrozado from "../assets/Pollo/polloTrozado.jpg";
+import arrollado from "../assets/Pollo/arrollados.jpg";
+import papas from "../assets/Pollo/papas.jpg";
+import merluza from "../assets/Pollo/merluza.webp";
+import nuggets from "../assets/Pollo/nuggets.jpg";
 
 import Spinner from "../assets/Spinner/Spinner.jsx";
-import Logo from "../assets/LogoCoqui.png"
+import Logo from "../assets/Logo.png";
 
 const API = process.env.REACT_APP_API_STRAPI;
 
-export const Congelados = (id) => {
-  const mesa = id.match.url.slice(1, 3);
+export const Achuras = (id) => {
+  const mesa = id?.match.url.slice(1, 3);
 
   let dispatch = useDispatch();
 
   let { allProduct } = useSelector((state) => state.alldata);
 
 
-  const soloEsteComercio = allProduct.filter(
+  const soloEsteComercio = allProduct?.filter(
     (e) => e.attributes.comercio.data.id === 1
   );
 
   const Productos = soloEsteComercio?.filter(
-    (e) => e.attributes?.categorias?.data?.id === 5
+    (e) => e.attributes?.categorias?.data?.id === 7
   );
 
 

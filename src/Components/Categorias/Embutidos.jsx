@@ -32,7 +32,7 @@ export const Embutidos
   );
 
   const Productos = soloEsteComercio?.filter(
-    (e) => e.attributes?.categorias?.data.id === 4
+    (e) => e.attributes?.categorias?.data?.id === 4
   );
 
 

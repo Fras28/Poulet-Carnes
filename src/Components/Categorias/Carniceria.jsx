@@ -33,7 +33,7 @@ export const Carniceria = (id) => {
   );
 
     const Productos = soloEsteComercio?.filter(
-      (e) => e.attributes?.categorias?.data.id === 1
+      (e) => e.attributes?.categorias?.data?.id === 1
     );
   
   
@@ -63,7 +63,7 @@ export const Carniceria = (id) => {
             product[0] ? (
               <a
                 key={index}
-                href={`#${product[0].attributes.sub_categoria.data.id}`}
+                href={`#${product[0]?.attributes?.sub_categoria?.data?.id}`}
               >
                 {product[0]?.attributes.sub_categoria.data.attributes.name}
               </a>

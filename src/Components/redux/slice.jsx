@@ -123,8 +123,48 @@ const PASSWORDU = process.env.REACT_APP_PASSWORD;
 export const asyncAllProducts = () => {
   return async function (dispatch) {
     try {
-      const response = await axios.get(API_STRAPI_ARTICTULOS);
-      return dispatch(allProducts(response.data.data));
+      let currentPage = 1;
+      let allData = [];
+
+      // Realizar solicitudes de paginación hasta que se recopile toda la información
+      while (true) {
+        const pagination = {}; // Declarar el objeto pagination
+        pagination.page = currentPage; // Declarar la propiedad page en pagination
+
+        const response = await axios.get(`${API_STRAPI_ARTICTULOS}`, {
+          params: { pagination },
+        });
+
+        if (!response.data.data || response.data.data.length === 0) {
+          // Si no hay más datos, salir del bucle
+          break;
+        }
+
+        // Filtrar los datos para asegurarse de tener valores en sub_categoria.data y categorias.data
+        const filteredData = response.data.data.filter(
+          (item) =>
+            item.attributes?.sub_categoria?.data &&
+            item.attributes?.sub_categoria?.data?.id &&
+            item.attributes?.categorias?.data &&
+            item.attributes?.categorias?.data?.id
+        );
+
+        // Agregar los datos filtrados de la página actual al conjunto total
+        allData = [...allData, ...filteredData];
+
+        // Ir a la siguiente página
+        currentPage++;
+
+        // Actualizar la condición del bucle while
+        if (response.data.data.length < 25) {
+          // Si hay menos de 25 elementos en la respuesta, asumimos que es la última página
+          break;
+        }
+      }
+
+      // Despachar la acción con la información completa
+    
+      return dispatch(allProducts(allData));
     } catch (error) {
       console.error("Error fetching data:", error);
     }

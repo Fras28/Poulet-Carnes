@@ -33,7 +33,7 @@ export const Cerdo = (id) => {
   );
 
   const Productos = soloEsteComercio?.filter(
-    (e) => e.attributes?.categorias?.data.id === 3
+    (e) => e.attributes?.categorias?.data?.id === 3
   );
 
 
