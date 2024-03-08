@@ -12,6 +12,8 @@ const initialState = {
   comercio:[],
   clave:"",
   comandas:[],
+  comandasTrue:[],
+  comandasFalse:[],
   usuarioComander:"",
 };
 
@@ -82,20 +84,26 @@ export const dataSlice = createSlice({
       };
     },
     fillComanda: (state, action) => {
-      let newComandas = Array.isArray(action.payload) ? action.payload : [action.payload];
-      newComandas = newComandas.flat(); // Flatten the array
+      let newComandas = Array.isArray(action.payload) ? action.payload.flat() : [action.payload];
     
-      // Filter out existing comandas to avoid duplicates
-      const uniqueComandas = newComandas.filter(newComanda =>
-        !state.comandas.some(comanda => comanda.id === newComanda.id)
-      );
+      // Utilizar un Set para evitar duplicados
+      const uniqueComandasSet = new Set([...state.comandas.map(comanda => comanda.id), ...newComandas.map(comanda => comanda.id)]);
+      const uniqueComandas = Array.from(uniqueComandasSet).map(id => newComandas.find(comanda => comanda.id === id));
+    
+      // Ordenar las comandas: false primero, luego true
+      uniqueComandas.sort((a, b) => (a.attributes.Status === b.attributes.Status ? 0 : a.attributes.Status ? 1 : -1));
+    
+      // Filtrar comandas por Status
+      const comandasTrue = uniqueComandas.filter(comanda => comanda.attributes.Status === true);
+      const comandasFalse = uniqueComandas.filter(comanda => comanda.attributes.Status === false);
     
       return {
         ...state,
         comandas: [...state.comandas, ...uniqueComandas],
+        comandasTrue: comandasTrue,
+        comandasFalse: comandasFalse,
       };
     },
-    
   },
 });
 
@@ -249,8 +257,7 @@ export const asyncComandas = () => {
         },
       });
 
-      console.log(response.data.data, "antes de enviarlo");
-
+      console.log(response.data.data, "antes de enviarlo asyncComandas");
 
       return dispatch(fillComanda(response?.data?.data));
     } catch (error) {
@@ -269,12 +276,11 @@ export const asyncPedidoRealizado = (comanda) => {
       const initialState = getState();
       const usuarioComander = initialState?.alldata?.usuarioComander;
 
-      // Modifica solo el estado de la propiedad 'status' a true
+      // Modifica solo el estado de la propiedad 'Status' a true o false
       const updatedComanda = {
         ...comanda.attributes,
-        Status: comanda.attributes.Status === false ? true : false,
+        Status: !comanda.attributes.Status,
       };
-  
 
       const response = await axios.put(`${API_ORDER}/${comanda.id}`, { data: updatedComanda }, {
         headers: {
@@ -283,12 +289,14 @@ export const asyncPedidoRealizado = (comanda) => {
         },
       });
 
-      console.log(response.data.data, "antes de enviarlo");
-
       // Después de realizar la edición, vuelve a obtener las comandas actualizadas
       await dispatch(asyncComandas());
 
-      return dispatch(fillComanda(response?.data?.data));
+      // Actualiza los estados comandasTrue y comandasFalse
+      const updatedComandasTrue = getState().alldata.comandas.filter(comanda => comanda.attributes.Status === true);
+      const updatedComandasFalse = getState().alldata.comandas.filter(comanda => comanda.attributes.Status === false);
+
+      return dispatch(fillComanda(response?.data?.data, updatedComandasTrue, updatedComandasFalse));
     } catch (error) {
       console.error('Error al obtener comandas:', error);
       // Puedes dispatchar una acción para manejar el error según tus necesidades

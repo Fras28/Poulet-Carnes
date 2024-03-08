@@ -64,6 +64,18 @@
 
   background-color:#0897f6 ;
 }
+
+
+.BtnComander2{
+  padding: .5rem;
+  border-radius: 8px;
+  background-color:yellow;
+}
+
+.BtnComander2:hover{
+
+  background-color:rgb(174, 174, 0) ;
+}
 /* Add additional styling as needed */
 
   /* Estilos para el formulario de inicio de sesión */
