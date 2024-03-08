@@ -54,7 +54,7 @@ export const Polleria = (id) => {
   const dynamicVariables = Object.keys(subCategoriaFilters).map((key) => {
     return subCategoriaFilters[key];
   });
-  console.log(soloEsteComercio[0].attributes.categorias.data," esto son los productos de carniceria");
+
 
   return (
     <div className="containerL">

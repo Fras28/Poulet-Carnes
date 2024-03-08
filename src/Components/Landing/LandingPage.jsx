@@ -16,6 +16,11 @@ export default function LandingPage(url) {
 
   const id = url.location.pathname.slice(1, 3);
   const { categorias } = useSelector((state) => state.alldata);
+const categoriasTrue = categorias.filter((categoria) => categoria.attributes.articulos.data.length !== 0)
+
+
+
+console.log(categoriasTrue, "llegar a confirmar que esa categoria tiene articulos");
   return (
     <div className="animate__animated  animate__zoomIn">
       {categorias.length === 0 ? <Spinner imageUrl={Logo} /> : null}
@@ -50,7 +55,7 @@ export default function LandingPage(url) {
 
       <div className="conteinerLB2  ">
         <div className="rowsCardL">
-          {categorias?.map((categoria) => (
+          {categoriasTrue?.map((categoria) => (
             <NavLink
               className="navLink"
               to={
