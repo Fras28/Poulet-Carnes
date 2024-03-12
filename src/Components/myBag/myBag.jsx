@@ -110,7 +110,7 @@ export const BagXX = (id) => {
   return (
     <div className="backBag">
       <Nav id={id.match.params.id} />
-      <div className="contBag animate__animated   animate__rollIn animate__faster">
+      <div className="contBag">
         <CardsBag products={result} />
       </div>
       <div className="boxPedido">

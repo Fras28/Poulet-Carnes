@@ -6,13 +6,13 @@
     font-size: 17px;
     font-weight: 500;
     color: #181818;
-    border: 3px solid #fec195;
+    border: 3px solid lightgray;
     border-radius: 8px;
-    box-shadow: 0 0 0 #fec1958c;
     transition: all 0.3s ease-in-out;
     cursor: pointer;
     width: 50%;
     margin: auto;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
   }
   
   .star-1 {

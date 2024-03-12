@@ -95,7 +95,9 @@
   justify-content: center;
   gap: 1rem;
 }
-
+.Location:hover{
+ background-color: grey;
+}
 
 @media (max-width: 600px) {
   .btnEnter{

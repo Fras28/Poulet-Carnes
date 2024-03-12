@@ -8,19 +8,23 @@ import { VerPedido } from "../BtnBag/BtnBag";
 import { useSelector } from "react-redux";
 
 import Spinner from "../assets/Spinner/Spinner";
+import HorariosModal from "../Modal/ModalConfirmacion/ModalHorarios";
+import Horarios from "../BtnNavidad/Horarios";
 
 const API = process.env.REACT_APP_API_STRAPI;
 
 export default function LandingPage(url) {
-  
-
   const id = url.location.pathname.slice(1, 3);
   const { categorias } = useSelector((state) => state.alldata);
-const categoriasTrue = categorias?.filter((categoria) => categoria?.attributes?.articulos?.data.length !== 0)
+  const categoriasTrue = categorias?.filter(
+    (categoria) => categoria?.attributes?.articulos?.data.length !== 0
+  );
 
+  console.log(
+    categoriasTrue,
+    "llegar a confirmar que esa categoria tiene articulos"
+  );
 
-
-console.log(categoriasTrue, "llegar a confirmar que esa categoria tiene articulos");
   return (
     <div className="animate__animated  animate__zoomIn">
       {categorias.length === 0 ? <Spinner imageUrl={Logo} /> : null}
@@ -40,7 +44,7 @@ console.log(categoriasTrue, "llegar a confirmar que esa categoria tiene articulo
           >
             <path d="M59 0.999995L0 1" stroke="#E88A23" />
           </svg>
-          <p className="naviTit2"> Nuesto Catalogo </p>
+          <Horarios />
           <svg
             width="59"
             height="2"

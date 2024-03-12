@@ -31,15 +31,15 @@
   display: flex;
 }
 .btnPlus {
-
-  width: 100%;
-  height: 100%;
+  background-color: #fff;
   border-radius: 16px;
-  border: outset green 2px;
-  font-family: "Montserrat", sans-serif;
+  box-shadow: 0 2px 4px rgba(0,0,0,.4), 0 7px 13px -3px rgba(0,0,0,.3), inset 0 -3px 0 rgba(0,0,0,.2);
   color: green;
+  font-family: Montserrat, sans-serif;
   font-weight: 600;
-  background-color: rgb(255, 255, 255);
+  height: 100%;
+  outline: 2px outset green;
+  width: 100%;
 }
 
 .btnPlus:active {
@@ -95,6 +95,7 @@
   margin-top: 1rem;
   box-shadow: 0px 0px 8px #FDAB97;
   padding: 1rem 0.3rem 1rem 0.3rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,.4), 0 7px 13px -3px rgba(0,0,0,.3), inset 0 -3px 0 rgba(0,0,0,.2);
 }
 .price{
 margin: 0;
