@@ -14,36 +14,35 @@
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  width: 100%;
 }
+
 .titInicio {
-  width: 135px;
-  height: 135px;
+  width: 149px;
+  height: 157px;
   word-wrap: break-word;
   border-radius: 16px;
   background-color: white;
   margin: 0.3rem;
   color: #295db1;
   font-weight: 700;
-  box-shadow: 0 2px 4px rgba(0,0,0,.4), 0 7px 13px -3px rgba(0,0,0,.3), inset 0 -3px 0 rgba(0,0,0,.2);
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
   font-family: 'Montserrat', sans-serif;
-  display: flex;  
-    display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
-.titInicioTop{
-  height: 60%;
-  padding-top: .5rem;
-  overflow: hidden;
-
-}
-.titInicioBot{
-  border-top: 1px solid black ;
-  margin-top: .5rem;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
 }
 
+.titInicio >img{
+  object-fit: cover;
+  width: 100%;
+  height: 70%;
+  border-radius:16px 16px 0 0 ;
+}
+.titInicio >p{
+  margin: auto;
+  padding: 0 0.5rem;
+  color: black;
 
-
+}
 .naviLanding {
   display: flex;
   align-items: center;
@@ -51,9 +50,10 @@
   min-height: 100px;
   font-size: 1.3rem;  
   margin-bottom: 16px;
-  /* background-image: url("../assets/bgNav.png"); */
-  /* background: radial-gradient(circle at 10% 20%, rgb(255, 200, 124) 0%, rgb(252, 251, 121) 90%); */
 
+}
+.fullWidth{
+  width: 100%;
 }
 .navi2{
   display: flex;
@@ -62,20 +62,51 @@
   justify-content: space-evenly;
   font-size: 1.3rem;
   font-family: 'Montserrat', sans-serif;
+  margin-top: 16px;
 }
-.navi2 >p{
- margin:0 1rem 0 1rem
-}
+
 
 
 .naviTit2{
 display:flex ;
 font-weight: 600;
+color: whitesmoke;
 }
 .naviTit3{
   display:flex ;
   font-weight: 600;
-  color: black;
+  color: orange;
+  background-color: #3E593A;
+  padding: .5rem;
+  border: solid white 3px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(to right,#77530a,#ffd277,#77530a,#77530a,#ffd277,#77530a);
+  background-size: 250%;
+  background-position: left;
+  color: #ffd277;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition-duration: 1s;
+  overflow: hidden;
+  }
+
+  .naviTit3::before {
+    position: absolute;
+    content: "Seguinos en";
+    color: #ffd277;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 97%;
+    height: 90%;
+    border-radius: 8px;
+    transition-duration: 1s;
+    background-color: rgba(0, 0, 0, 0.842);
+    background-size: 200%;
   }
 .titCasa {
   display: flex;
@@ -119,6 +150,7 @@ font-weight: 800;
   justify-content: space-evenly;
   gap: 7px;
   margin-bottom: 7px;
+  flex-direction: row-reverse;
 }
 
 
@@ -142,7 +174,5 @@ font-weight: 800;
     color: #d47618;
     border-radius: 20%;
     border: solid white;
-  }
-  .conteinerLB2 {
   }
 }

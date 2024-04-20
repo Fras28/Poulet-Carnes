@@ -1,33 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import "./LandingPage.css";
 
 import Logo from "../assets/Logo.png";
 import { VerPedido } from "../BtnBag/BtnBag";
 
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import Spinner from "../assets/Spinner/Spinner";
-import HorariosModal from "../Modal/ModalConfirmacion/ModalHorarios";
 import Horarios from "../BtnNavidad/Horarios";
 
-const API = process.env.REACT_APP_API_STRAPI;
-
 export default function LandingPage(url) {
+  const { comercio, categorias } = useSelector((state) => state.alldata);
+  const API = process.env.REACT_APP_API_STRAPI;
   const id = url.location.pathname.slice(1, 3);
-  const { categorias } = useSelector((state) => state.alldata);
-  const categoriasTrue = categorias?.filter(
-    (categoria) => categoria?.attributes?.articulos?.data.length !== 0
-  );
-
-  console.log(
-    categoriasTrue,
-    "llegar a confirmar que esa categoria tiene articulos"
-  );
 
   return (
     <div className="animate__animated  animate__zoomIn">
-      {categorias.length === 0 ? <Spinner imageUrl={Logo} /> : null}
+      {!categorias ? <Spinner imageUrl={Logo} /> : null}
       <div className="naviLanding titCasa ">
         <div className="logoL">
           <NavLink to={`/${id}`}>
@@ -59,30 +49,34 @@ export default function LandingPage(url) {
 
       <div className="conteinerLB2  ">
         <div className="rowsCardL">
-          {categoriasTrue?.map((categoria) => (
+          {categorias?.map((categoria, index) => (
+            categoria?.attributes?.articulos?.data?.length !== 0?
             <NavLink
-              className="navLink"
+              className={`navLink `}
               to={
                 url.location.pathname === "/"
-                  ? `/${categoria?.attributes?.name}`
-                  : `${url.location.pathname}/${categoria?.attributes?.name}`
+                  ? `/${categoria.attributes?.name}`
+                  : `${url?.location?.pathname}/${categoria?.attributes?.name}`
               }
             >
-              <div className="titInicio">
-                <div className="titInicioTop">
-                  <img
-                    src={
-                      `${API}${categoria?.attributes?.picture?.data?.attributes?.url}` ||
-                      Logo
-                    }
-                    alt="fotito"
-                  />
-                </div>
-                <div className="titInicioBot">
-                  <p>{categoria?.attributes?.name}</p>
-                </div>
+              <div
+                className={`titInicio ${
+                  index === comercio.length - 1 && index % 2 === 0
+                    ? "fullWidth"
+                    : ""
+                }`}
+              >
+                <img
+                  src={categoria?.attributes?.picture?.data != null ?
+                    API +
+                      categoria?.attributes?.picture?.data?.attributes?.formats
+                        ?.small?.url : Logo
+                  }
+                  alt="fotito"
+                />
+                <p>{categoria?.attributes?.name}</p>
               </div>
-            </NavLink>
+            </NavLink> : null
           ))}
         </div>
       </div>
